@@ -13,3 +13,9 @@ startButton.addEventListener('click', () => {
   startButton.disabled = true;
   stopButton.disabled = false;
 });
+
+stopButton.addEventListener('click', () => {
+    clearInterval(timerId);
+    startButton.disabled = false;
+    stopButton.disabled = true;
+});
