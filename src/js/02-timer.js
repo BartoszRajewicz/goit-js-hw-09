@@ -7,9 +7,7 @@ const dateTimePicker = document.querySelector('#datetime-picker');
 const startButton = document.querySelector('[data-start]');
 
 startButton.addEventListener('click', () => {
-    startButton.disabled = true;
-    
-    
+  startButton.disabled = true;
 });
 
 const options = {
@@ -55,4 +53,27 @@ console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
+}
+
+function updateCounter(selectedDate) {
+  const intervalId = setInterval(() => {
+    const currentDate = new Date();
+    const timeDifference = selectedDate - currentDate;
+
+    if (timeDifference <= 0) {
+
+      startButton.disabled = true;
+      clearInterval(intervalId);
+    }
+
+    const { days, hours, minutes, seconds } = convertMs(timeDifference);
+
+
+    document.querySelector('[data-days]').textContent = addLeadingZero(days);
+    document.querySelector('[data-hours]').textContent = addLeadingZero(hours);
+    document.querySelector('[data-minutes]').textContent =
+      addLeadingZero(minutes);
+    document.querySelector('[data-seconds]').textContent =
+      addLeadingZero(seconds);
+  }, 1000);
 }
