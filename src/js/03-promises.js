@@ -3,9 +3,9 @@ const form = document.querySelector('form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
 
-  const firstDelay = form.querySelector('input[name = "delay"]');
-  const delayStep = form.querySelector('input[name = "step"]');
-  const amount = form.querySelector('input[name = "amount"]');
+  const firstDelay = parseInt(form.querySelector('input[name="delay"]').value);
+  const delayStep = parseInt(form.querySelector('input[name="step"]').value);
+  const amount = parseInt(form.querySelector('input[name="amount"]').value);
 
   for (let i = 1; i <= amount; i++) {
     const delay = firstDelay + (i - 1) * delayStep;
