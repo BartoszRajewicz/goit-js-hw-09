@@ -3,17 +3,21 @@ const form = document.querySelector('form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
 
-  const firstDelayInput = form.querySelector('input[name = "delay"]');
-  const delayStepInput = form.querySelector('input[name = "step"]');
-  const amountInput = form.querySelector('input[name = "amount"]');
+  const firstDelay = form.querySelector('input[name = "delay"]');
+  const delayStep = form.querySelector('input[name = "step"]');
+  const amount = form.querySelector('input[name = "amount"]');
 
-  createPromise(i, delay)
-    .then(({ position, delay }) => {
-      console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-    })
-    .catch(({ position, delay }) => {
-      console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-    });
+  for (let i = 1; i <= amount; i++) {
+    const delay = firstDelay + (i - 1) * delayStep;
+
+    createPromise(i, delay)
+      .then(({ position, delay }) => {
+        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+      });
+  }
 });
 
 function createPromise(position, delay) {
