@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const dateTimePicker = document.querySelector('#datetime-picker');
   const startButton = document.querySelector('[data-start]');
 
+  function setStartButtonDisabled(disabled) {
+    startButton.disabled = disabled;
+  }
+
   startButton.addEventListener('click', () => {
-    startButton.disabled = true;
+    setStartButtonDisabled(true);
   });
 
   const options = {
@@ -20,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(selectedDates);
 
       if (selectedDates && selectedDates[0] > new Date()) {
-        startButton.disabled = false;
+        setStartButtonDisabled(false);
         updateCounter(selectedDates);
       } else {
-        startButton.disabled = true;
+        setStartButtonDisabled(true);
         window.alert('Please choose a date in the future');
       }
     },
@@ -64,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const timeDifference = selectedDates[0] - currentDate;
 
       if (timeDifference <= 0) {
-        startButton.disabled = true;
+        setStartButtonDisabled(true);
         clearInterval(intervalId);
       }
 
